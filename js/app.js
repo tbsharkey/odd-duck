@@ -11,6 +11,7 @@ const products = [];
 
 let totalRounds = 25;
 let currentRound = 0;
+let currentProducts = [];
 
 products.push(new Product('bag', './img/bag.jpg'));
 products.push(new Product('banana', './img/banana.jpg'));
@@ -48,8 +49,6 @@ function renderProducts() {
   let product2 = products[getRandomIndex()];
   let product3 = products[getRandomIndex()];
 
-  console.log(product1, product2, product3);
-
   while (product1.name === product2.name || product1.name === product3.name) {
     product1 = products[getRandomIndex()];
   }
@@ -70,6 +69,7 @@ function renderProducts() {
   image3.alt = product3.name;
   product3.timesShown += 1;
 
+  currentProducts = [product1, product2, product3];
 }
 
 renderProducts();
@@ -84,10 +84,12 @@ function handleProductClick(event) {
     }
   }
   
+ 
   currentRound++;
   if (currentRound <= totalRounds) {
     renderProducts();
   } else {
+
     productDisplay.removeEventListener('click', handleProductClick);
     displayResults();
   }
