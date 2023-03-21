@@ -1,0 +1,27 @@
+header {
+  width: 100%;
+  text-align: center;
+}
+
+main h2 {
+  text-align: center;
+}
+
+img {
+  height: 250px;
+}
+
+.product {
+  width: calc(100% / 3);
+  display: inline;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+#product-display {
+  display: flex;
+  justify-content: space-between;
+  max-width: 960px; /* adjust this value as needed */
+  margin: 0 auto;
+}
