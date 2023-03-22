@@ -2,9 +2,9 @@
 
 const products = [];
 
-let totalRounds = 5;
+let totalRounds = 10;
 let currentRound = 0;
-let currentProducts = [];
+// let currentProducts = [];
 
 function Product(name, filePath) {
   this.name = name;
@@ -47,18 +47,33 @@ function getRandomIndex() {
   return Math.floor(Math.random() * products.length);
 }
 
+function getRandomImage() {
+  
+  let randomImage = products[getRandomIndex()]
+  while (randomImage.name === image1.alt || randomImage.name === image2.alt || randomImage.name === image3.alt ) {
+
+    randomImage = products[getRandomIndex()];
+
+  }
+
+
+  return randomImage;
+}
+
+
+
 function renderProducts() {
 
-  let product1 = products[getRandomIndex()];
-  let product2 = products[getRandomIndex()];
-  let product3 = products[getRandomIndex()];
+  let product1 = getRandomImage()
+  let product2 = getRandomImage()
+  let product3 = getRandomImage()
 
   while (product1.name === product2.name || product1.name === product3.name) {
-    product1 = products[getRandomIndex()];
+    product1 = getRandomImage()
   }
 
   while (product2.name === product1.name || product2.name === product3.name) {
-    product2 = products[getRandomIndex()];
+    product2 = getRandomImage()
   }
 
   image1.src = product1.filePath;
@@ -74,9 +89,7 @@ function renderProducts() {
   product3.timesShown += 1;
 
  
-  currentProducts.push(product1)
-  currentProducts.push(product2)
-  currentProducts.push(product3)
+  
 }
 
 renderProducts();
@@ -84,13 +97,11 @@ renderProducts();
 function handleProductClick(event) {
   const clickedProduct = event.target.alt;
   
-  for (let i = 0; i < currentProducts.length; i++) {
-
-    if (clickedProduct === currentProducts[i].name) {
-
-      currentProducts[i].timesClicked++;
-      break;
-
+  for (let i =0; i < products.length - 1; i++) {
+    
+    if (clickedProduct === products[i].name) {
+        products[i].timesClicked++;
+        break;
     }
   }
   
@@ -104,7 +115,6 @@ function handleProductClick(event) {
     image2.removeEventListener('click', handleProductClick);
     image3.removeEventListener('click', handleProductClick);
 
-    // displayResults();
 
   }
 }
@@ -115,10 +125,6 @@ function displayResults() {
   productDisplay.innerHTML = '';
 
   let resultList = document.getElementById("results-list")
-  // const heading = document.createElement('h2');
-
-  // heading.textContent = 'Results';
-  // productDisplay.appendChild(heading);
 
   for (let i = 0; i < products.length; i++) {
 
