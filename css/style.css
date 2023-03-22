@@ -3,6 +3,10 @@ header {
   text-align: center;
 }
 
+body {
+  max-width: 960px;
+}
+
 main h2 {
   text-align: center;
 }
@@ -11,17 +15,29 @@ img {
   height: 250px;
 }
 
+ul  {
+  text-align: center;
+  
+}
+
+li {
+  list-style-type: none;
+  margin: 5px;
+}
+
 .product {
   width: calc(100% / 3);
   display: inline;
   text-align: center;
   box-sizing: border-box;
   padding: 10px;
+  border: solid 1px black;
+  margin: 2px;
 }
 
 #product-display {
   display: flex;
   justify-content: space-between;
-  max-width: 960px; /* adjust this value as needed */
+  max-width: 960px; 
   margin: 0 auto;
 }
