@@ -113,18 +113,20 @@ function displayResults() {
   products.sort((a, b) => (a.timesClicked / a.timesShown) > (b.timesClicked / b.timesShown) ? -1 : 1);
   
   productDisplay.innerHTML = '';
-  const heading = document.createElement('h2');
 
-  heading.textContent = 'Results';
-  productDisplay.appendChild(heading);
+  let resultList = document.getElementById("results-list")
+  // const heading = document.createElement('h2');
+
+  // heading.textContent = 'Results';
+  // productDisplay.appendChild(heading);
 
   for (let i = 0; i < products.length; i++) {
 
     const product = products[i];
     const listItem = document.createElement('li');
-
-    listItem.textContent = `${product.name}: ${product.timesClicked} clicks (${((product.timesClicked / product.timesShown) * 100).toFixed(1)}% click-through rate)`;
-    productDisplay.appendChild(listItem);
+    // banana had 3 votes, and was seen 5 times.
+    listItem.textContent = `${product.name} had ${product.timesClicked} votes and was seen ${product.timesShown} times`;
+    resultList.appendChild(listItem)
 
   }
 }
