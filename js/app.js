@@ -1,5 +1,11 @@
 'use strict';
 
+const products = [];
+
+let totalRounds = 5;
+let currentRound = 0;
+let currentProducts = [];
+
 function Product(name, filePath) {
   this.name = name;
   this.filePath = filePath;
@@ -7,37 +13,35 @@ function Product(name, filePath) {
   this.timesClicked = 0;
 }
 
-const products = [];
 
-let totalRounds = 25;
-let currentRound = 0;
-let currentProducts = [];
-
-products.push(new Product('bag', './img/bag.jpg'));
-products.push(new Product('banana', './img/banana.jpg'));
-products.push(new Product('bathroom', './img/bathroom.jpg'));
-products.push(new Product('boots', './img/boots.jpg'));
-products.push(new Product('breakfast', './img/breakfast.jpg'));
-products.push(new Product('bubblegum', './img/bubblegum.jpg'));
-products.push(new Product('chair', './img/chair.jpg'));
-products.push(new Product('cthulhu', './img/cthulhu.jpg'));
-products.push(new Product('dog-duck', './img/dog-duck.jpg'));
-products.push(new Product('dragon', './img/dragon.jpg'));
-products.push(new Product('pen', './img/pen.jpg'));
-products.push(new Product('pet-sweep', './img/pet-sweep.jpg'));
-products.push(new Product('scissors', './img/scissors.jpg'));
-products.push(new Product('shark', './img/shark.jpg'));
-products.push(new Product('sweep', './img/sweep.png'));
-products.push(new Product('tauntaun', './img/tauntaun.jpg'));
-products.push(new Product('unicorn', './img/unicorn.jpg'));
-products.push(new Product('water-can', './img/water-can.jpg'));
-products.push(new Product('wine-glass', './img/wine-glass.jpg'));
+products.push(new Product('Bag', './img/bag.jpg'));
+products.push(new Product('Banana', './img/banana.jpg'));
+products.push(new Product('Bathroom', './img/bathroom.jpg'));
+products.push(new Product('Boots', './img/boots.jpg'));
+products.push(new Product('Breakfast', './img/breakfast.jpg'));
+products.push(new Product('Bubblegum', './img/bubblegum.jpg'));
+products.push(new Product('Chair', './img/chair.jpg'));
+products.push(new Product('Cthulhu', './img/cthulhu.jpg'));
+products.push(new Product('Dog-duck', './img/dog-duck.jpg'));
+products.push(new Product('Dragon', './img/dragon.jpg'));
+products.push(new Product('Pen', './img/pen.jpg'));
+products.push(new Product('Pet-sweep', './img/pet-sweep.jpg'));
+products.push(new Product('Scissors', './img/scissors.jpg'));
+products.push(new Product('Shark', './img/shark.jpg'));
+products.push(new Product('Sweep', './img/sweep.png'));
+products.push(new Product('Tauntaun', './img/tauntaun.jpg'));
+products.push(new Product('Unicorn', './img/unicorn.jpg'));
+products.push(new Product('Water-can', './img/water-can.jpg'));
+products.push(new Product('Wine-glass', './img/wine-glass.jpg'));
 
 let image1 = document.getElementById('image1');
 let image2 = document.getElementById('image2');
 let image3 = document.getElementById('image3');
 let productDisplay = document.getElementById('product-display');
-productDisplay.addEventListener('click', handleProductClick);
+
+image1.addEventListener('click', handleProductClick);
+image2.addEventListener('click', handleProductClick);
+image3.addEventListener('click', handleProductClick);
 
 function getRandomIndex() {
   return Math.floor(Math.random() * products.length);
@@ -69,7 +73,10 @@ function renderProducts() {
   image3.alt = product3.name;
   product3.timesShown += 1;
 
-  currentProducts = [product1, product2, product3];
+ 
+  currentProducts.push(product1)
+  currentProducts.push(product2)
+  currentProducts.push(product3)
 }
 
 renderProducts();
@@ -78,20 +85,27 @@ function handleProductClick(event) {
   const clickedProduct = event.target.alt;
   
   for (let i = 0; i < currentProducts.length; i++) {
+
     if (clickedProduct === currentProducts[i].name) {
+
       currentProducts[i].timesClicked++;
       break;
+
     }
   }
   
- 
   currentRound++;
+
   if (currentRound <= totalRounds) {
     renderProducts();
   } else {
 
-    productDisplay.removeEventListener('click', handleProductClick);
-    displayResults();
+    image1.removeEventListener('click', handleProductClick);
+    image2.removeEventListener('click', handleProductClick);
+    image3.removeEventListener('click', handleProductClick);
+
+    // displayResults();
+
   }
 }
 
@@ -100,12 +114,17 @@ function displayResults() {
   
   productDisplay.innerHTML = '';
   const heading = document.createElement('h2');
+
   heading.textContent = 'Results';
   productDisplay.appendChild(heading);
+
   for (let i = 0; i < products.length; i++) {
+
     const product = products[i];
     const listItem = document.createElement('li');
+
     listItem.textContent = `${product.name}: ${product.timesClicked} clicks (${((product.timesClicked / product.timesShown) * 100).toFixed(1)}% click-through rate)`;
     productDisplay.appendChild(listItem);
+
   }
 }
