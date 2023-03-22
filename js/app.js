@@ -1,5 +1,34 @@
 'use strict';
 
+const ctx = document.getElementById('myChart');
+
+  let mainChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [],
+      datasets: [{
+        label: '# of Votes',
+        data: [],
+        borderWidth: 1
+      },
+      {
+        label: '# of Times Seen',
+        data: [],
+        borderWidth: 1
+      }
+    ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+
+mainChart.data.datasets[0].data
 const products = [];
 
 let totalRounds = 10;
@@ -38,6 +67,7 @@ let image1 = document.getElementById('image1');
 let image2 = document.getElementById('image2');
 let image3 = document.getElementById('image3');
 let productDisplay = document.getElementById('product-display');
+let resultsSection = document.getElementById('results')
 
 image1.addEventListener('click', handleProductClick);
 image2.addEventListener('click', handleProductClick);
@@ -114,25 +144,50 @@ function handleProductClick(event) {
     image1.removeEventListener('click', handleProductClick);
     image2.removeEventListener('click', handleProductClick);
     image3.removeEventListener('click', handleProductClick);
-
-
+    productDisplay.innerHTML = '';  
+    resultsSection.style.visibility = "visible"
   }
 }
 
 function displayResults() {
   products.sort((a, b) => (a.timesClicked / a.timesShown) > (b.timesClicked / b.timesShown) ? -1 : 1);
   
-  productDisplay.innerHTML = '';
+  
+  
+populateChartData(); 
+mainChart.update();
 
-  let resultList = document.getElementById("results-list")
+  // let resultList = document.getElementById("results-list")
+  // resultList.innerHTML = '';
 
-  for (let i = 0; i < products.length; i++) {
+  // for (let i = 0; i < products.length; i++) {
 
-    const product = products[i];
-    const listItem = document.createElement('li');
-    // banana had 3 votes, and was seen 5 times.
-    listItem.textContent = `${product.name} had ${product.timesClicked} votes and was seen ${product.timesShown} times.`;
-    resultList.appendChild(listItem)
+  //   const product = products[i];
+  //   const listItem = document.createElement('li');
+  //   // banana had 3 votes, and was seen 5 times.
+  //   listItem.textContent = `${product.name} had ${product.timesClicked} votes and was seen ${product.timesShown} times.`;
+  //   resultList.appendChild(listItem)
 
-  }
+  // }
+
+
 }
+
+function populateChartData() {
+
+  for (let i = 0; i < products.length -1 ; i++) {
+    
+      let product = products[i];
+      
+      // Adding the name to labels array
+      mainChart.data.labels.push(product.name)
+
+      // Add the number of times clicked to first data set
+      mainChart.data.datasets[0].data.push(product.timesClicked)
+
+      // Add the number of times seen to the second data set
+      mainChart.data.datasets[1].data.push(product.timesShown)
+  }
+
+}
+
