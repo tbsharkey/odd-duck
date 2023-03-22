@@ -125,7 +125,7 @@ function displayResults() {
     const product = products[i];
     const listItem = document.createElement('li');
     // banana had 3 votes, and was seen 5 times.
-    listItem.textContent = `${product.name} had ${product.timesClicked} votes and was seen ${product.timesShown} times`;
+    listItem.textContent = `${product.name} had ${product.timesClicked} votes and was seen ${product.timesShown} times.`;
     resultList.appendChild(listItem)
 
   }
