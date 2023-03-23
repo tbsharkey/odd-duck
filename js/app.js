@@ -31,7 +31,7 @@ const ctx = document.getElementById('myChart');
 mainChart.data.datasets[0].data
 const products = [];
 
-let totalRounds = 10;
+let totalRounds = 25;
 let currentRound = 0;
 // let currentProducts = [];
 
