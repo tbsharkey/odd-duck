@@ -5,6 +5,23 @@ header {
 
 body {
   max-width: 960px;
+  background-color: #5d96bc;
+  margin: 0 auto;
+}
+
+header {
+  display: inline-block;
+}
+
+header img {
+  border-radius: 50%;
+  
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 main h2 {
@@ -13,11 +30,11 @@ main h2 {
 
 img {
   height: 250px;
+  max-width: 100%;
 }
 
-ul  {
+ul {
   text-align: center;
-  
 }
 
 li {
@@ -31,13 +48,24 @@ li {
   text-align: center;
   box-sizing: border-box;
   padding: 10px;
-  border: solid 1px black;
+  border: solid 5px black;
   margin: 2px;
+}
+
+.product:hover {
+  border-color: yellow;
 }
 
 #product-display {
   display: flex;
-  justify-content: space-between;
-  max-width: 960px; 
+  justify-content: center;
   margin: 0 auto;
+}
+
+
+#view-results {
+  display: block;
+  margin: 20px auto;
+  padding: 10px;
+  border-radius: 5px;
 }
