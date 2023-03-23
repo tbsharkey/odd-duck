@@ -6,13 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Odd Duck Product Co</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <header>
-    <h1>Odd Duck Product Voting</h1>
+    <img src="img/duck.jpg" alt="Duck Logo">
+    <h1>Odd Duck Products</h1>
   </header>
   <main>
     <h2>Please pick your favorite product of the three pictured</h2>
+    <p>Your selection will help us narrow down our product offerings to only the best!</p>
     <section id="product-display">
       <div class="product">
         <img src="" alt="Product 1" id="image1">
@@ -24,17 +27,20 @@
         <img src="" alt="Product 3" id="image3">
       </div>
     </section>
-    <section id="results">
+    <section id="results" style="visibility: hidden;">
       <h2>Results</h2>
       <ul id="results-list">
             
       </ul>
       <canvas id="myChart"></canvas>
+
+
+      </canvas>
+      <button id="view-results" onclick="displayResults()">View Results</button>
     </section>
-    <button id="view-results" onclick="displayResults()">View Results</button>
   </main>
   <script src="js/app.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
 
 </body>
 </html>
