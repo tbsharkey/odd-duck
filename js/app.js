@@ -1,6 +1,50 @@
 'use strict';
 
 const ctx = document.getElementById('myChart');
+let resultsButton = document.getElementById('view-results')
+
+// let mainChart = new Chart(ctx, {
+//   type: 'bar',
+//   data: {
+//     labels: [],
+//     datasets: [{
+//       label: '# of Votes',
+//       data: [],
+//       backgroundColor: 'white',
+//       borderWidth: 1
+//     },
+//     {
+//       label: '# of Times Seen',
+//       data: [],
+//       backgroundColor: 'red',
+//       borderWidth: 1
+//     }]
+//   },
+//   options: {
+//     scales: {
+//       y: {
+//         beginAtZero: true
+//       },
+//       x: {
+//         ticks: {
+//           font: {
+//             weight: 'bold', // set font weight to bold
+//             size: 14 // set font size to 14px
+//           },
+//         },
+//     },
+//     plugins: {
+//       legend: {
+//         labels: {
+//           font: {
+//             size: 30, 
+//             weight: 'bold'
+//           }
+//         }
+//       }
+//     }
+//   }
+// });
 
 let mainChart = new Chart(ctx, {
   type: 'bar',
@@ -9,18 +53,60 @@ let mainChart = new Chart(ctx, {
     datasets: [{
       label: '# of Votes',
       data: [],
+      backgroundColor: 'white',
       borderWidth: 1
     },
     {
       label: '# of Times Seen',
       data: [],
+      backgroundColor: 'red',
       borderWidth: 1
     }]
   },
   options: {
     scales: {
       y: {
-        beginAtZero: true
+        beginAtZero: true,
+        ticks: {
+          font: {
+            weight: 'bold', // set font weight to bold
+            size: 14 // set font size to 14px
+          },
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Y Axis Label',
+          font: {
+            weight: 'bold',
+            size: 16
+          }
+        }
+      },
+      x: {
+        ticks: {
+          font: {
+            weight: 'bold', // set font weight to bold
+            size: 14 // set font size to 14px
+          },
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'X Axis Label',
+          font: {
+            weight: 'bold',
+            size: 16
+          }
+        }
+      },
+    },
+    plugins: {
+      legend: {
+        labels: {
+          font: {
+            size: 30, 
+            weight: 'bold'
+          }
+        }
       }
     }
   }
@@ -147,7 +233,7 @@ function handleProductClick(event) {
     image3.removeEventListener('click', handleProductClick);
     productDisplay.innerHTML = '';
     resultsSection.style.visibility = "visible";
-    displayResults();
+    // displayResults();
   }
 
   saveToLocalStorage();
@@ -161,6 +247,7 @@ function displayResults() {
 }
 
 function populateChartData() {
+  
   for (let i = 0; i < products.length; i++) {
     let product = products[i];
 
@@ -172,10 +259,13 @@ function populateChartData() {
 
     // Add the number of times seen to the second data set
     mainChart.data.datasets[1].data.push(product.timesShown);
+
   }
+  resultsButton.removeEventListener('click', displayResults)
 }
 
 function saveToLocalStorage() {
   localStorage.setItem('products', JSON.stringify(products));
 }
 
+resultsButton.addEventListener('click', displayResults)
